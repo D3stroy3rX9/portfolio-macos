@@ -18,7 +18,7 @@ interface Menu {
 
 export default function MenuBar() {
   const { getActiveAppName, openWindow } = useWindows();
-  const { theme, toggleTheme, isDark } = useTheme();
+  const { toggleTheme, isDark } = useTheme();
   const [time, setTime] = useState(new Date());
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [openTray, setOpenTray] = useState<string | null>(null);

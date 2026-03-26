@@ -127,7 +127,7 @@ export function MusicIcon() {
   );
 }
 
-export function TrashIcon({ isEmpty = true }: { isEmpty?: boolean }) {
+export function TrashIcon({ isEmpty: _isEmpty = true }: { isEmpty?: boolean }) {
   return (
     <svg viewBox="0 0 120 120" width="100%" height="100%">
       <rect width="120" height="120" rx="26" fill="#7a9aaa"/>
