@@ -1,0 +1,262 @@
+/* Desktop — shader canvas handles the background */
+.desktop {
+  position: fixed;
+  top: 25px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background: #d1d1d6;  /* very light grey */
+}
+
+/* ===== DESKTOP ICONS (right column, dock-style) ===== */
+.desktop-icons {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Fixed-height column — icons float upward on magnify */
+  padding: 8px 0;
+  gap: 8px;
+  z-index: 2;
+}
+
+/* Slot: fixed-width container so layout never shifts */
+.desktop-icon-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 68px;
+  flex-shrink: 0;
+}
+
+/* The clickable icon — floats up via margin-bottom (set inline) */
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  /* No transition on size — instant magnification like the dock */
+}
+
+/* Icon image wrapper */
+.desktop-icon-img {
+  border-radius: 11px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+  transition: filter 0.15s;
+  flex-shrink: 0;
+}
+
+.desktop-icon-img svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.desktop-icon:active .desktop-icon-img {
+  filter: brightness(0.82) drop-shadow(0 2px 6px rgba(0,0,0,0.55));
+}
+
+/* Label below icon */
+.desktop-icon-label {
+  font-size: 10.5px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85), 0 0 10px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+  font-weight: 500;
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  margin-top: 4px;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.12s;
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tooltip — appears above icon, hides label */
+.desktop-icon-tooltip {
+  position: absolute;
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(28, 28, 32, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: rgba(255, 255, 255, 0.92);
+  padding: 4px 11px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  /* Arrow pointing right */
+}
+
+.desktop-icon-tooltip::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: rgba(28, 28, 32, 0.94);
+}
+
+/* Open-app indicator dot */
+.desktop-icon-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  margin-top: 3px;
+  flex-shrink: 0;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+/* ===== SPLINE ROBOT — centered, in front of bg ===== */
+.desktop-spline {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Multiply: Spline's light grey bg × dark grey desktop = transparent-ish */
+  mix-blend-mode: multiply;
+}
+
+/* Clip bottom 50px to hide the "Built with Spline" watermark painted on canvas */
+.desktop-spline > div {
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent !important;
+  clip-path: inset(0 0 70px 0);
+}
+
+.desktop-spline canvas {
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent !important;
+}
+
+/* Hide any DOM watermark elements */
+.desktop-spline a,
+.desktop-spline > div > *:not(canvas) {
+  display: none !important;
+}
+
+/* ===== NAME CARD — bottom-right corner ===== */
+.desktop-greeting {
+  position: absolute;
+  bottom: 80px;   /* above the dock */
+  right: 96px;    /* left of the icon column */
+  text-align: right;
+  z-index: 2;
+  pointer-events: none;
+  padding: 22px 28px;
+  background: rgba(30, 30, 34, 0.82);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.desktop-greeting h1 {
+  font-size: 32px;
+  font-weight: 700;
+  font-family: 'Archivo', sans-serif;
+  margin: 0 0 4px;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #34d399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.desktop-greeting p {
+  font-size: 13px;
+  color: rgba(241, 245, 249, 0.58);
+  margin: 0;
+  font-weight: 400;
+}
+
+.greeting-hint {
+  margin-top: 10px !important;
+  font-size: 11px !important;
+  color: rgba(241, 245, 249, 0.28) !important;
+  font-weight: 400 !important;
+}
+
+/* ===== LIGHT THEME ===== */
+
+/* Light mode desktop: clean white bg, no shader */
+[data-theme="light"] .desktop {
+  background: #ffffff;
+}
+
+/* In light mode, Spline bg (E3E3E3) blends against white via multiply:
+   grey × white = grey → matches light grey robot stage look.
+   Switch to normal blend so the white bg shows cleanly. */
+[data-theme="light"] .desktop-spline {
+  mix-blend-mode: normal;
+}
+
+/* Make the Spline canvas bg appear as part of the white desktop */
+[data-theme="light"] .desktop-spline > div {
+  background: #ffffff !important;
+}
+
+[data-theme="light"] .desktop-icon-label {
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6), 0 1px 8px rgba(0,0,0,0.3);
+}
+
+[data-theme="light"] .desktop-icon-tooltip {
+  background: rgba(245, 245, 248, 0.96);
+  color: rgba(0, 0, 0, 0.82);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .desktop-icon-tooltip::after {
+  border-left-color: rgba(245, 245, 248, 0.96);
+}
+
+[data-theme="light"] .desktop-icon-dot {
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: none;
+}
+
+[data-theme="light"] .desktop-spline { pointer-events: auto; }
+
+[data-theme="light"] .desktop-greeting {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .desktop-greeting h1 {
+  background: linear-gradient(135deg, #4c1d95, #1d4ed8, #0891b2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .desktop-greeting p {
+  color: rgba(15, 23, 42, 0.62);
+}

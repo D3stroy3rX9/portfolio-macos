@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(npx uipro:*)",
+      "Bash(npx uipro-cli:*)",
+      "Bash(npx uipro-cli@2.2.3 init --ai claude)",
+      "Bash(claude mcp:*)",
+      "Read(//usr/local/bin/**)",
+      "Read(//Users/amrit/.npm/bin/**)",
+      "Bash(npx claude:*)",
+      "Bash(ls ~/.claude/*.json)",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"portfolio creative developer glassmorphism dark\" --design-system -p \"Portfolio macOS\")",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"glassmorphism dark portfolio\" --domain style -n 3)",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"glassmorphism frosted glass dark\" --domain prompt -n 1)",
+      "Bash(npm run:*)",
+      "Bash(npx vite:*)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(find /Users/amrit/.claude /Users/amrit/Downloads/portfolio-macos/.claude -name *.json)",
+      "Bash(find '/Users/amrit/Library/Application Support/Claude' -name *.json -not -path */Cache/* -not -path */GPUCache/* -not -path */DawnWebGPUCache/* -not -path */DawnGraphiteCache/*)",
+      "Bash(find '/Users/amrit/Library/Application Support/Claude' -name managed-settings.json -o -name policy*.json)",
+      "Bash(npm install:*)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

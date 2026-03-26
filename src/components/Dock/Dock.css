@@ -1,0 +1,121 @@
+/* ── Wrapper — extends hover zone above the dock ── */
+.dock-wrapper {
+  position: fixed;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  overflow: visible;
+  padding: 20px 0 0;   /* invisible top hit-area so hover doesn't drop on upward mouse move */
+}
+
+/* ── The grey pill — width driven purely by fixed slots + gap + padding ── */
+.dock {
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 16px 2px;
+  background: rgba(45, 45, 50, 0.42);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-radius: 20px;
+  border: 0.5px solid rgba(255, 255, 255, 0.18);
+  gap: 6px;
+  overflow: visible;
+  /* Smooth expand on hover — padding grows, dock widens gracefully */
+  transition: padding 0.22s ease;
+}
+
+/* When hovered, add horizontal breathing room so the pill visibly "opens up" */
+.dock.dock--hovered {
+  padding: 10px 28px 2px;
+}
+
+[data-theme="light"] .dock {
+  background: rgba(220, 220, 225, 0.48);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* ── Slot — ALWAYS fixed at BASE_ICON_SIZE width, never changes ──
+   Icons overflow upward via overflow:visible — slot size never
+   fluctuates so the dock never wobbles. */
+.dock-slot {
+  position: relative;
+  /* width driven by JS inline style — Gaussian magnification */
+  height: 64px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+
+/* ── Icon — absolute, anchored to bottom of slot, grows upward ── */
+.dock-item {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dock-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  overflow: hidden;
+  flex-shrink: 0;
+  /* No CSS transition — Gaussian math already produces smooth per-frame updates
+     from mousemove. Transitions add lag and cause the "stuck wave" on fast moves. */
+}
+
+.dock-item:active .dock-icon-wrap {
+  opacity: 0.75;
+}
+
+/* ── Tooltip ── */
+.dock-tooltip {
+  position: absolute;
+  top: -28px;
+  background: rgba(30, 30, 34, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: rgba(255, 255, 255, 0.92);
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s;
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+}
+
+[data-theme="light"] .dock-tooltip {
+  background: rgba(240, 240, 244, 0.94);
+  color: rgba(0, 0, 0, 0.82);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.dock-item:hover .dock-tooltip {
+  opacity: 1;
+}
+
+/* ── Open-app indicator dot ── */
+.dock-indicator {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+[data-theme="light"] .dock-indicator {
+  background: rgba(0, 0, 0, 0.45);
+}

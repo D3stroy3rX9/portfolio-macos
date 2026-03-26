@@ -1,0 +1,318 @@
+.widgets-container {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 3;
+  width: 306px;  /* 148 + 10 + 148 */
+}
+
+/* Row wrapper for side-by-side widgets */
+.widgets-row {
+  display: flex;
+  gap: 10px;
+}
+
+/* Shared widget base */
+.widget {
+  background: rgba(30, 30, 34, 0.72);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-radius: 16px;
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Calendar Widget */
+.widget-calendar {
+  width: 148px;
+  padding: 10px 10px 8px;
+  flex-shrink: 0;
+}
+
+.cal-header {
+  margin-bottom: 6px;
+}
+
+.cal-month {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #FF453A;
+  letter-spacing: 0.5px;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  text-align: center;
+}
+
+.cal-day-header {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+  padding: 2px 0;
+}
+
+.cal-day {
+  font-size: 10px;
+  padding: 2px 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.cal-day.empty {
+  visibility: hidden;
+}
+
+.cal-day.today {
+  background: #FF453A;
+  color: white;
+  font-weight: 600;
+  border-radius: 50%;
+}
+
+/* Notes Widget */
+.widget-notes {
+  width: 148px;
+  padding: 10px 12px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.notes-header {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #FFD60A;
+  letter-spacing: 0.5px;
+}
+
+.notes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.notes-item {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 400;
+  line-height: 1.3;
+  padding-left: 10px;
+  position: relative;
+}
+
+.notes-item::before {
+  content: '·';
+  position: absolute;
+  left: 2px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Weather Widget — full width, iOS style */
+.widget-weather {
+  width: 100%;
+  padding: 12px 14px 10px;
+}
+
+.weather-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.weather-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+.weather-city {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 0;
+}
+
+.weather-temp {
+  font-size: 42px;
+  font-weight: 200;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.weather-emoji-large {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.weather-desc {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+  text-align: right;
+}
+
+.weather-range {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: right;
+}
+
+.weather-divider {
+  height: 0.5px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 8px 0;
+}
+
+.weather-hourly {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+
+.weather-hour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+}
+
+.weather-hour-time {
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.weather-hour-emoji {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.weather-hour-temp {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.weather-loading,
+.weather-error {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 8px 0;
+}
+
+/* Photo Carousel Widget — full width */
+.widget-photos {
+  width: 100%;
+  height: 160px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.photos-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: photo-fade 0.5s ease;
+}
+
+@keyframes photo-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.photos-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+.photos-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.photos-dot.active {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.widget-photos-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.photos-empty-icon { font-size: 28px; }
+
+.photos-empty-text {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Light theme widgets */
+[data-theme="light"] .widget {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(0, 0, 0, 0.06);
+  color: #1d1d1f;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .cal-day { color: rgba(0, 0, 0, 0.7); }
+[data-theme="light"] .cal-day-header { color: rgba(0, 0, 0, 0.35); }
+[data-theme="light"] .notes-header { color: #b8860b; }
+[data-theme="light"] .notes-item { color: rgba(0, 0, 0, 0.65); }
+[data-theme="light"] .notes-item::before { color: rgba(0, 0, 0, 0.25); }
+[data-theme="light"] .weather-city { color: rgba(0, 0, 0, 0.82); }
+[data-theme="light"] .weather-temp { color: rgba(0, 0, 0, 0.88); }
+[data-theme="light"] .weather-desc { color: rgba(0, 0, 0, 0.55); }
+[data-theme="light"] .weather-range { color: rgba(0, 0, 0, 0.35); }
+[data-theme="light"] .weather-loading { color: rgba(0, 0, 0, 0.35); }
+[data-theme="light"] .weather-divider { background: rgba(0, 0, 0, 0.1); }
+[data-theme="light"] .weather-hour-time { color: rgba(0, 0, 0, 0.45); }
+[data-theme="light"] .weather-hour-temp { color: rgba(0, 0, 0, 0.75); }
+[data-theme="light"] .photos-empty-text { color: rgba(0, 0, 0, 0.4); }
+[data-theme="light"] .photos-dot { background: rgba(0, 0, 0, 0.3); }
+[data-theme="light"] .photos-dot.active { background: rgba(0, 0, 0, 0.75); }

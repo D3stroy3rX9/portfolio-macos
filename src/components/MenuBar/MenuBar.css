@@ -1,0 +1,525 @@
+.menubar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 25px;
+  background: rgba(36, 36, 36, 0.78);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  z-index: 10000;
+  user-select: none;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+}
+
+.menubar-left {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.menubar-apple {
+  padding: 0 12px 0 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  border-radius: 4px;
+}
+
+.menubar-apple:hover { background: rgba(255, 255, 255, 0.12); }
+
+.menubar-appname {
+  font-weight: 600;
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: default;
+  border-radius: 4px;
+  font-size: 13.5px;
+  letter-spacing: -0.1px;
+}
+
+.menubar-menu-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.menubar-item {
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  cursor: default;
+  transition: background 0.08s;
+  font-size: 13px;
+}
+
+.menubar-item:hover,
+.menubar-item.active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ===== DROPDOWN MENUS ===== */
+.menubar-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background: rgba(38, 38, 40, 0.95);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 4px 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45), 0 0 0 0.5px rgba(0, 0, 0, 0.2);
+  z-index: 10001;
+  margin-top: 1px;
+}
+
+.menubar-apple .menubar-dropdown { left: -4px; }
+
+.dropdown-item {
+  padding: 3px 14px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.88);
+  cursor: default;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+  margin: 0 4px;
+}
+
+.dropdown-item:not(.disabled):hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+.dropdown-item.disabled { color: rgba(255, 255, 255, 0.3); }
+
+.dropdown-shortcut {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-left: 24px;
+}
+
+.dropdown-item:not(.disabled):hover .dropdown-shortcut { color: rgba(255, 255, 255, 0.7); }
+
+.dropdown-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 4px 0;
+}
+
+/* ===== RIGHT SIDE / TRAY ===== */
+.menubar-right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 100%;
+  position: relative;
+}
+
+.tray-icon {
+  width: 26px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  opacity: 0.85;
+}
+
+.tray-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+
+.menubar-datetime {
+  padding: 0 6px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: default;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  border-radius: 4px;
+  white-space: nowrap;
+  letter-spacing: -0.1px;
+}
+
+.menubar-datetime:hover { background: rgba(255, 255, 255, 0.1); }
+
+/* ===== TRAY PANELS (WiFi, Battery, CC) ===== */
+.tray-panel {
+  position: fixed;
+  top: 28px;
+  min-width: 260px;
+  background: rgba(38, 38, 42, 0.94);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 0 0 0.5px rgba(0, 0, 0, 0.15);
+  z-index: 10002;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 13px;
+}
+
+.tray-panel-cc { min-width: 300px; }
+
+.tray-panel-header {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.tray-panel-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.3px;
+  margin-bottom: 6px;
+  margin-top: 4px;
+}
+
+.tray-panel-info {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 2px 0;
+}
+
+.tray-panel-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 10px 0;
+}
+
+.tray-panel-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+/* Toggle switch */
+.toggle-switch {
+  width: 34px;
+  height: 20px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.toggle-switch.on {
+  background: #34C759;
+}
+
+.toggle-knob {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.on .toggle-knob {
+  left: 16px;
+}
+
+/* Slider */
+.tray-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0 8px;
+}
+
+.tray-slider {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.tray-slider-fill {
+  height: 100%;
+  background: #fff;
+  border-radius: 2px;
+}
+
+/* WiFi network list */
+.tray-network {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: default;
+  font-size: 13px;
+}
+
+.tray-network:hover { background: rgba(255, 255, 255, 0.06); }
+
+.tray-network.active {
+  color: #fff;
+  font-weight: 500;
+}
+
+.tray-network.active svg:first-child {
+  color: #34C759;
+}
+
+.tray-network span { flex: 1; }
+
+/* Battery visual */
+.tray-battery-visual {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0 10px;
+}
+
+.battery-big {
+  flex: 1;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.battery-big-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #34C759, #30D158);
+  border-radius: 5px;
+}
+
+.battery-percent {
+  font-size: 22px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Control Center grid */
+.cc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.cc-tile {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  cursor: pointer;
+  transition: background 0.12s;
+  border: 0.5px solid rgba(255, 255, 255, 0.04);
+}
+
+.cc-tile:hover { background: rgba(255, 255, 255, 0.1); }
+
+.cc-tile.on {
+  background: rgba(0, 122, 255, 0.25);
+  border-color: rgba(0, 122, 255, 0.3);
+}
+
+.cc-tile span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cc-tile.on span { color: rgba(255, 255, 255, 0.9); }
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle-row {
+  display: flex;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.theme-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid transparent;
+  transition: all 0.15s;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.theme-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-option.active {
+  background: rgba(0, 122, 255, 0.2);
+  border-color: #007AFF;
+  color: #fff;
+}
+
+.theme-option span {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* ===== LIGHT THEME OVERRIDES ===== */
+[data-theme="light"] .menubar {
+  background: rgba(240, 240, 244, 0.78);
+  color: rgba(0, 0, 0, 0.82);
+}
+
+[data-theme="light"] .menubar-item:hover,
+[data-theme="light"] .menubar-item.active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .menubar-apple:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .menubar-datetime:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .tray-icon:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .menubar-dropdown {
+  background: rgba(245, 245, 248, 0.96);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .dropdown-item {
+  color: rgba(0, 0, 0, 0.82);
+}
+
+[data-theme="light"] .dropdown-item.disabled {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] .dropdown-shortcut {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .dropdown-divider {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .tray-panel {
+  background: rgba(245, 245, 248, 0.96);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.82);
+}
+
+[data-theme="light"] .tray-panel-header {
+  color: rgba(0, 0, 0, 0.88);
+}
+
+[data-theme="light"] .tray-panel-label {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="light"] .tray-panel-info {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] .tray-panel-divider {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .toggle-switch {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .tray-slider {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .tray-slider-fill {
+  background: #333;
+}
+
+[data-theme="light"] .tray-network:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .tray-network.active {
+  color: #000;
+}
+
+[data-theme="light"] .battery-big {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .battery-percent {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="light"] .cc-tile {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .cc-tile:hover {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="light"] .cc-tile span {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="light"] .cc-tile.on span {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="light"] .theme-option {
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] .theme-option:hover {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="light"] .theme-option.active {
+  background: rgba(0, 122, 255, 0.12);
+  color: #007AFF;
+}
