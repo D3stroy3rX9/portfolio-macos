@@ -2,11 +2,12 @@ import { skills } from '../../data/projects';
 import './Apps.css';
 
 const categoryMeta: Record<string, { icon: string; label: string; color: string }> = {
-  backend:  { icon: '⚡', label: 'Backend',  color: '#ff6b6b' },
-  frontend: { icon: '🎨', label: 'Frontend', color: '#4ecdc4' },
-  devops:   { icon: '🚀', label: 'DevOps',   color: '#45b7d1' },
-  data:     { icon: '🗄️', label: 'Data',     color: '#96ceb4' },
-  tools:    { icon: '🔧', label: 'Tools',    color: '#dda0dd' },
+  backend:      { icon: '⚡',  label: 'Backend',      color: '#ff6b6b' },
+  ecommerce:    { icon: '🛒',  label: 'E-Commerce',   color: '#4ecdc4' },
+  devops:       { icon: '🚀',  label: 'DevOps',       color: '#45b7d1' },
+  data:         { icon: '🗄️', label: 'Data',          color: '#96ceb4' },
+  tools:        { icon: '🔧',  label: 'Tools',        color: '#dda0dd' },
+  architecture: { icon: '🏗️', label: 'Architecture', color: '#f7b731' },
 };
 
 function SkillBar({ name, level }: { name: string; level: number }) {
