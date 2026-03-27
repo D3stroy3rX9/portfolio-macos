@@ -128,6 +128,8 @@
   flex: 1;
   overflow: auto;
   background: rgba(7, 12, 27, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--text-primary, #f1f5f9);
 }
 
