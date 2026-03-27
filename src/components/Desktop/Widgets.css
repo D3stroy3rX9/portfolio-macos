@@ -88,13 +88,12 @@
 /* Notes Widget */
 .widget-notes {
   width: 148px;
+  height: 148px;
   padding: 10px 12px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  /* stretch to same height as sibling calendar widget */
-  align-self: stretch;
   overflow: hidden;
 }
 
