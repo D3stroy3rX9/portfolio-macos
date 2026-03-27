@@ -80,7 +80,7 @@ export default function Terminal() {
 
       case 'about':
         addLines([
-          { type: 'output', content: '\n  Amrit Sinha' },
+          { type: 'output', content: '\n  Amrit' },
           { type: 'output', content: '  SAP Hybris Backend Developer & AI Tools Enthusiast\n' },
           { type: 'output', content: '  Building enterprise-grade backends by day,' },
           { type: 'output', content: '  exploring MCP servers and AI tooling by night.\n' },

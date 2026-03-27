@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import './Apps.css';
 
@@ -9,21 +9,27 @@ const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  as string;
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 export default function Contact() {
-  const formRef   = useRef<HTMLFormElement>(null);
-  const [subject, setSubject] = useState('');
-  const [status, setStatus]   = useState<Status>('idle');
+  const [fromName,  setFromName]  = useState('');
+  const [fromEmail, setFromEmail] = useState('');
+  const [subject,   setSubject]   = useState('');
+  const [message,   setMessage]   = useState('');
+  const [status,    setStatus]    = useState<Status>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formRef.current) return;
     setStatus('sending');
     try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY);
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        { from_name: fromName, from_email: fromEmail, subject, message },
+        { publicKey: PUBLIC_KEY }
+      );
       setStatus('sent');
-      formRef.current.reset();
-      setSubject('');
+      setFromName(''); setFromEmail(''); setSubject(''); setMessage('');
       setTimeout(() => setStatus('idle'), 4000);
-    } catch {
+    } catch (err) {
+      console.error('EmailJS error:', err);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 4000);
     }
@@ -48,16 +54,17 @@ export default function Contact() {
         <div className="mail-field">
           <label>To:</label>
           <span className="mail-recipient">
-            <span className="recipient-chip">Amrit Sinha &lt;amrit.01sinha@gmail.com&gt;</span>
+            <span className="recipient-chip">Amrit &lt;amrit.01sinha@gmail.com&gt;</span>
           </span>
         </div>
 
-        <form ref={formRef} onSubmit={handleSubmit} className="mail-form">
+        <form onSubmit={handleSubmit} className="mail-form">
           <div className="mail-field">
             <label>Name:</label>
             <input
               type="text"
-              name="from_name"
+              value={fromName}
+              onChange={e => setFromName(e.target.value)}
               placeholder="Your name"
               className="mail-input"
               required
@@ -68,7 +75,8 @@ export default function Contact() {
             <label>From:</label>
             <input
               type="email"
-              name="from_email"
+              value={fromEmail}
+              onChange={e => setFromEmail(e.target.value)}
               placeholder="your@email.com"
               className="mail-input"
               required
@@ -79,7 +87,6 @@ export default function Contact() {
             <label>Subject:</label>
             <input
               type="text"
-              name="subject"
               value={subject}
               onChange={e => setSubject(e.target.value)}
               placeholder="Let's work together!"
@@ -90,7 +97,8 @@ export default function Contact() {
 
           <div className="mail-body">
             <textarea
-              name="message"
+              value={message}
+              onChange={e => setMessage(e.target.value)}
               className="mail-textarea"
               placeholder={"Hi Amrit,\n\nI came across your portfolio and would love to connect about..."}
               rows={8}

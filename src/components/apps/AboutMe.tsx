@@ -7,7 +7,7 @@ export default function AboutMe() {
       <div className="about-hero">
         <div className="about-avatar">AS</div>
         <div className="about-intro">
-          <h1>Amrit Sinha</h1>
+          <h1>Amrit</h1>
           <p className="about-tagline">SAP Hybris Backend Developer &amp; AI Tools Enthusiast</p>
           <div className="about-badges">
             <span className="badge">Java</span>
