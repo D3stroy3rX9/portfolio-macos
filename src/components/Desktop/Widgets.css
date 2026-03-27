@@ -831,3 +831,15 @@
   font-family: 'Space Grotesk', sans-serif;
   letter-spacing: 0.5px;
 }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  /* Widgets are desktop-only; hide on mobile */
+  .widgets-container { display: none; }
+}
+
+@media (max-width: 1024px) {
+  .widgets-container { top: 8px; left: 10px; width: 270px; }
+  .widget-calendar   { width: 128px; }
+  .widget-notes      { width: 128px; height: 128px; }
+}

@@ -523,3 +523,44 @@
   background: rgba(0, 122, 255, 0.12);
   color: #007AFF;
 }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .menubar {
+    height: 44px;
+    padding: 0 12px;
+  }
+  /* Hide menu items — keep only Apple logo */
+  .menubar-appname,
+  .menubar-menu-wrapper { display: none; }
+  /* Tray: keep only clock + 2 icons */
+  .menubar-right { gap: 4px; }
+  .tray-icon { width: 32px; }
+  .menubar-datetime { font-size: 12px; padding: 0 4px; }
+  /* Panels go full-width on mobile */
+  .tray-panel,
+  .tray-panel-cc {
+    position: fixed;
+    top: 44px;
+    left: 8px;
+    right: 8px;
+    min-width: unset;
+    width: auto;
+    border-radius: 14px;
+    max-height: 80dvh;
+    overflow-y: auto;
+  }
+  .menubar-dropdown {
+    position: fixed;
+    top: 44px;
+    left: 8px;
+    right: 8px;
+    min-width: unset;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .menubar { height: 32px; }
+  .menubar-item { font-size: 12px; padding: 0 8px; }
+}

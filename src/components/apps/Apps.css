@@ -873,3 +873,113 @@
   background: linear-gradient(90deg, #6d28d9, #2563eb, #0891b2);
   box-shadow: 0 0 6px rgba(109, 40, 217, 0.3);
 }
+
+/* ================================================================
+   RESPONSIVE — Tablet (≤1024px) and Mobile (≤768px)
+   ================================================================ */
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .app-about    { padding: 20px; }
+  .about-hero   { gap: 16px; }
+  .about-avatar { width: 72px; height: 72px; font-size: 24px; }
+
+  .projects-sidebar { width: 150px; min-width: 150px; }
+  .projects-grid    { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+
+  .skills-grid      { grid-template-columns: 1fr 1fr; }
+  .skill-bar-name   { width: 110px; }
+
+  .app-contact      { padding: 20px; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+
+  /* --- Shared --- */
+  .app-about,
+  .app-skills,
+  .app-contact  { padding: 16px; }
+
+  /* --- About Me --- */
+  .about-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+  }
+  .about-avatar { width: 60px; height: 60px; font-size: 22px; }
+  .about-intro h1 { font-size: 18px; }
+  .about-tagline  { font-size: 12px; }
+  .about-section h2 { font-size: 11px; }
+  .about-section p  { font-size: 13px; }
+  .building-grid    { grid-template-columns: 1fr !important; }
+
+  /* --- Projects --- */
+  .app-projects { display: flex; flex-direction: column; }
+  .projects-toolbar { flex-wrap: wrap; gap: 6px; padding: 8px 10px; }
+  .toolbar-path { display: none; }
+
+  .projects-layout  { flex-direction: column; overflow: visible; }
+  .projects-sidebar {
+    width: 100%;
+    min-width: unset;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 8px 0;
+    /* Horizontal scrollable filter chips */
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scrollbar-width: none;
+    gap: 0;
+  }
+  .projects-sidebar::-webkit-scrollbar { display: none; }
+  .sidebar-section  { margin-bottom: 0; display: flex; align-items: center; gap: 2px; }
+  .sidebar-label    { display: none; }
+  .sidebar-item     {
+    white-space: nowrap;
+    padding: 4px 12px;
+    margin: 4px 3px;
+    border-radius: 20px;
+    font-size: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .projects-main    { padding: 10px; }
+  .projects-grid    { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; }
+  .project-icon-large  { font-size: 30px; }
+  .project-card-name   { font-size: 10px; }
+  .project-card        { padding: 12px 6px 10px; }
+
+  .list-header .list-col.tech,
+  .list-row .list-col.tech { display: none; }
+
+  .project-detail {
+    margin: 10px;
+    padding: 14px;
+    border-radius: 12px;
+  }
+  .project-detail h3 { font-size: 15px; }
+
+  /* --- Skills --- */
+  .skills-grid   { grid-template-columns: 1fr; }
+  .skill-bar-row { gap: 8px; }
+  .skill-bar-name { width: 90px; font-size: 11px; }
+
+  /* --- Terminal --- */
+  .app-terminal  { font-size: 12px; padding: 10px 12px; }
+  .terminal-input { font-size: 12px; }
+
+  /* --- Contact --- */
+  .mail-compose   { padding: 14px; }
+  .mail-field     { flex-direction: column; gap: 4px; }
+  .mail-field label { width: auto; font-size: 12px; }
+  .mail-field input { font-size: 13px; }
+  .mail-body      { font-size: 13px; min-height: 80px; }
+  .contact-links  { flex-direction: column; }
+  .contact-link-card { flex: unset; width: 100%; }
+
+  /* --- Project detail panel full width on mobile --- */
+  .project-detail { width: auto; }
+}

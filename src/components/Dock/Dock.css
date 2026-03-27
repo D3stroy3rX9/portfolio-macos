@@ -119,3 +119,33 @@
 [data-theme="light"] .dock-indicator {
   background: rgba(0, 0, 0, 0.45);
 }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .dock-slot { height: 56px; }
+}
+
+@media (max-width: 768px) {
+  .dock-wrapper {
+    bottom: max(6px, env(safe-area-inset-bottom));
+    padding: 12px 0 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .dock {
+    padding: 8px 14px 4px;
+    border-radius: 20px;
+    gap: 4px;
+    max-width: calc(100vw - 24px);
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* No hover expand on mobile */
+    transition: none;
+  }
+  .dock::-webkit-scrollbar { display: none; }
+  .dock.dock--hovered { padding: 8px 14px 4px; }
+  .dock-slot { height: 58px; }
+  .dock-item { bottom: 6px; }
+  .dock-tooltip { display: none; }
+}

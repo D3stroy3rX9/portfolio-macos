@@ -260,3 +260,37 @@
 [data-theme="light"] .desktop-greeting p {
   color: rgba(15, 23, 42, 0.62);
 }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .desktop { top: 44px; }
+
+  /* Hide desktop icons on mobile */
+  .desktop-icons { display: none; }
+
+  /* Center the greeting card */
+  .desktop-greeting {
+    position: absolute;
+    bottom: auto;
+    right: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: calc(100vw - 48px);
+    max-width: 340px;
+    padding: 20px 22px;
+  }
+  .desktop-greeting h1 { font-size: 24px; }
+  .desktop-greeting p  { font-size: 12px; }
+  .greeting-hint       { font-size: 10px !important; }
+}
+
+@media (max-width: 1024px) {
+  .desktop { top: 32px; }
+  .desktop-greeting {
+    bottom: 70px;
+    right: 20px;
+    padding: 18px 22px;
+  }
+  .desktop-greeting h1 { font-size: 26px; }
+}

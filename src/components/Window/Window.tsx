@@ -2,6 +2,7 @@ import { type ReactNode, useCallback } from 'react';
 import { useWindows, type WindowState } from '../../contexts/WindowContext';
 import { useDrag } from '../../hooks/useDrag';
 import { useResize } from '../../hooks/useResize';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import './Window.css';
 
 interface WindowProps {
@@ -9,10 +10,14 @@ interface WindowProps {
   children: ReactNode;
 }
 
+const MOBILE_TOP  = 44;  // menu bar height on mobile
+const MOBILE_BOT  = 74;  // dock height on mobile
+
 export default function Window({ windowState, children }: WindowProps) {
   const { closeWindow, minimizeWindow, maximizeWindow, focusWindow, updateWindowPosition, updateWindowSize, activeWindowId } = useWindows();
   const { id, title, x, y, width, height, zIndex, isMinimized, isMaximized, minWidth, minHeight } = windowState;
   const isActive = activeWindowId === id;
+  const isMobile = useIsMobile();
 
   const onDrag = useCallback((newX: number, newY: number) => {
     updateWindowPosition(id, newX, newY);
@@ -27,14 +32,19 @@ export default function Window({ windowState, children }: WindowProps) {
 
   if (isMinimized) return null;
 
+  // On mobile: full-screen sheet below menu bar, above dock
+  const windowStyle = isMobile
+    ? { top: MOBILE_TOP, left: 0, width: '100vw', height: `calc(100dvh - ${MOBILE_TOP}px - ${MOBILE_BOT}px)`, zIndex }
+    : { left: x, top: y, width, height, zIndex };
+
   return (
     <div
-      className={`macos-window ${isActive ? 'active' : 'inactive'} ${isMaximized ? 'maximized' : ''}`}
-      style={{ left: x, top: y, width, height, zIndex }}
+      className={`macos-window ${isActive ? 'active' : 'inactive'} ${isMaximized ? 'maximized' : ''} ${isMobile ? 'mobile' : ''}`}
+      style={windowStyle}
       onMouseDown={() => focusWindow(id)}
     >
-      {/* Title bar */}
-      <div className="window-titlebar" onMouseDown={handleMouseDown} onDoubleClick={() => maximizeWindow(id)}>
+      {/* Title bar — disable drag on mobile */}
+      <div className="window-titlebar" onMouseDown={isMobile ? undefined : handleMouseDown} onDoubleClick={isMobile ? undefined : () => maximizeWindow(id)}>
         <div className="window-controls">
           <button className="window-btn close" onClick={(e) => { e.stopPropagation(); closeWindow(id); }} title="Close">
             <svg width="6" height="6" viewBox="0 0 6 6"><path d="M0 0L6 6M6 0L0 6" stroke="currentColor" strokeWidth="1.2"/></svg>
@@ -55,8 +65,8 @@ export default function Window({ windowState, children }: WindowProps) {
         {children}
       </div>
 
-      {/* Resize handles */}
-      {!isMaximized && (
+      {/* Resize handles — desktop only */}
+      {!isMaximized && !isMobile && (
         <>
           <div className="resize-handle resize-e" onMouseDown={(e) => handleResizeStart(e, 'e')} />
           <div className="resize-handle resize-s" onMouseDown={(e) => handleResizeStart(e, 's')} />

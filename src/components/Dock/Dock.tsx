@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useWindows } from '../../contexts/WindowContext';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import {
   FinderIcon, ProjectsIcon, TerminalIcon,
   SkillsIcon, ContactIcon, ChromeIcon, SafariIcon,
@@ -50,21 +51,22 @@ function getBaseIconCenters(): number[] {
 export default function Dock() {
   const { openWindow, windows } = useWindows();
   const [mouseX, setMouseX] = useState<number | null>(null);
+  const isMobile = useIsMobile();
 
   const handleMouseMove  = useCallback((e: React.MouseEvent) => setMouseX(e.clientX), []);
   const handleMouseLeave = useCallback(() => setMouseX(null), []);
 
   /**
    * Gaussian magnification — bell-curve falloff, no hard cutoff.
-   * Total dock width stays ~constant as the cursor moves across icons/gaps.
+   * Disabled on mobile (touch devices have no hover/mousemove).
    */
   const getIconSize = useCallback((index: number): number => {
-    if (mouseX === null) return BASE_ICON_SIZE;
+    if (isMobile || mouseX === null) return BASE_ICON_SIZE;
     const centers  = getBaseIconCenters();
     const d        = mouseX - centers[index];
     const strength = Math.exp(-(d * d) / (2 * SIGMA * SIGMA));
     return BASE_ICON_SIZE + (MAX_ICON_SIZE - BASE_ICON_SIZE) * strength;
-  }, [mouseX]);
+  }, [mouseX, isMobile]);
 
   const isAppOpen = (appId?: string) =>
     appId ? windows.some(w => w.appId === appId) : false;
