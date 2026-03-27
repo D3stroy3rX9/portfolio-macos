@@ -973,10 +973,23 @@
 
   /* --- Contact --- */
   .mail-compose   { padding: 14px; }
-  .mail-field     { flex-direction: column; gap: 4px; }
-  .mail-field label { width: auto; font-size: 12px; }
-  .mail-field input { font-size: 13px; }
-  .mail-body      { font-size: 13px; min-height: 80px; }
+  .mail-field {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 14px;
+    gap: 0;
+  }
+  .mail-field label {
+    width: 56px;
+    min-width: 56px;
+    font-size: 12px;
+    text-align: right;
+    padding-right: 10px;
+  }
+  .mail-input { font-size: 14px; }
+  .mail-textarea { font-size: 14px; padding: 12px 14px; min-height: 100px; }
+  .mail-footer { padding: 10px 14px; }
+  .send-btn { width: 100%; justify-content: center; padding: 12px; font-size: 15px; }
   .contact-links  { flex-direction: column; }
   .contact-link-card { flex: unset; width: 100%; }
 

@@ -179,11 +179,12 @@
 }
 
 .desktop-greeting h1 {
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 700;
-  font-family: 'Archivo', sans-serif;
-  margin: 0 0 4px;
-  letter-spacing: -1px;
+  font-family: 'Plus Jakarta Sans', 'Jakarta Sans', 'Space Grotesk', sans-serif;
+  margin: 0 0 6px;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
   background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #34d399 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -191,17 +192,26 @@
 }
 
 .desktop-greeting p {
-  font-size: 13px;
-  color: rgba(241, 245, 249, 0.58);
-  margin: 0;
+  font-size: 16px;
+  font-family: 'Plus Jakarta Sans', 'Jakarta Sans', 'Space Grotesk', sans-serif;
   font-weight: 400;
+  margin: 0;
+  /* transparent — gradient bleeds through */
+  background: linear-gradient(135deg, rgba(241,245,249,0.55), rgba(167,139,250,0.45));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .greeting-hint {
-  margin-top: 10px !important;
-  font-size: 11px !important;
-  color: rgba(241, 245, 249, 0.28) !important;
+  margin-top: 8px !important;
+  font-size: 12px !important;
+  font-family: 'Plus Jakarta Sans', 'Jakarta Sans', 'Space Grotesk', sans-serif !important;
   font-weight: 400 !important;
+  background: linear-gradient(135deg, rgba(241,245,249,0.28), rgba(96,165,250,0.22)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
 }
 
 /* ===== LIGHT THEME ===== */
@@ -268,21 +278,21 @@
   /* Hide desktop icons on mobile */
   .desktop-icons { display: none; }
 
-  /* Center the greeting card */
+  /* Greeting card — bottom of screen, above dock */
   .desktop-greeting {
     position: absolute;
-    bottom: auto;
+    bottom: 90px;
     right: auto;
-    top: 50%;
+    top: auto;
     left: 50%;
-    transform: translate(-50%, -60%);
-    width: calc(100vw - 48px);
+    transform: translateX(-50%);
+    width: calc(100vw - 40px);
     max-width: 340px;
-    padding: 20px 22px;
+    padding: 16px 20px;
   }
-  .desktop-greeting h1 { font-size: 24px; }
-  .desktop-greeting p  { font-size: 12px; }
-  .greeting-hint       { font-size: 10px !important; }
+  .desktop-greeting h1 { font-size: 28px; letter-spacing: -0.5px; }
+  .desktop-greeting p  { font-size: 13px; }
+  .greeting-hint       { font-size: 11px !important; margin-top: 4px !important; }
 }
 
 @media (max-width: 1024px) {
