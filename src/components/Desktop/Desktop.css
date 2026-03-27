@@ -288,7 +288,8 @@
   /* Greeting card — bottom of screen, above dock */
   .desktop-greeting {
     position: absolute;
-    bottom: 90px;
+    /* dock slot(58) + dock padding(12) + wrapper padding(10) + gap(20) + safe-area */
+    bottom: calc(max(8px, env(safe-area-inset-bottom)) + 110px);
     right: auto;
     top: auto;
     left: 50%;
