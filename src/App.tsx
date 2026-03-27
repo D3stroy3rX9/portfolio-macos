@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { WindowProvider, useWindows } from './contexts/WindowContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import MenuBar from './components/MenuBar/MenuBar';
 import Desktop from './components/Desktop/Desktop';
 import Dock from './components/Dock/Dock';
 import Window from './components/Window/Window';
+import LockScreen from './components/LockScreen/LockScreen';
 import AboutMe from './components/apps/AboutMe';
 import Projects from './components/apps/Projects';
 import Terminal from './components/apps/Terminal';
@@ -37,6 +39,8 @@ function WindowLayer() {
 }
 
 export default function App() {
+  const [locked, setLocked] = useState(true);
+
   return (
     <ThemeProvider>
       <WindowProvider>
@@ -45,6 +49,7 @@ export default function App() {
           <Desktop />
           <WindowLayer />
           <Dock />
+          {locked && <LockScreen onUnlocked={() => setLocked(false)} />}
         </div>
       </WindowProvider>
     </ThemeProvider>
