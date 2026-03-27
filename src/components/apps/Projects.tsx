@@ -48,8 +48,8 @@ export default function Projects() {
           <div className="sidebar-section">
             <span className="sidebar-label">Tags</span>
             <div className="sidebar-item">🏷️ Java</div>
-            <div className="sidebar-item">🏷️ TypeScript</div>
-            <div className="sidebar-item">🏷️ MCP</div>
+            <div className="sidebar-item">🏷️ SAP Commerce</div>
+            <div className="sidebar-item">🏷️ Python</div>
           </div>
         </div>
 

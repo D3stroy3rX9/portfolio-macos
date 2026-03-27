@@ -18,7 +18,7 @@ const dockItems: DockItem[] = [
   { id: 'finder',   label: 'About Me',  appId: 'about',    icon: FinderIcon },
   { id: 'projects', label: 'Projects',  appId: 'projects', icon: ProjectsIcon },
   { id: 'safari',   label: 'Links',     icon: SafariIcon,  isExternal: 'https://github.com/yourusername' },
-  { id: 'chrome',   label: 'Portfolio', icon: ChromeIcon,  isExternal: 'https://github.com/D3stroy3rX9' },
+  { id: 'chrome',   label: 'Resume',    icon: ChromeIcon,  isExternal: 'https://www.linkedin.com/in/amrit001/overlay/1767043411130/single-media-viewer/?profileId=ACoAAChvP5UBbRZnydgP0TCh-QNBxPlKdoRUvmU' },
   { id: 'skills',   label: 'Skills',    appId: 'skills',   icon: SkillsIcon },
   { id: 'terminal', label: 'Terminal',  appId: 'terminal', icon: TerminalIcon },
   { id: 'contact',  label: 'Contact',   appId: 'contact',  icon: ContactIcon },
