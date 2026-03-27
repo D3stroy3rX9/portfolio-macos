@@ -32,10 +32,19 @@ export const projects: Project[] = [
     status: 'live',
   },
   {
+    id: 'audio-translator',
+    name: 'Audio Auto-Translator',
+    description: 'Real-time voice translation app supporting 100+ languages using OpenAI Whisper for speech recognition and LibreTranslate for translation. Features one-click recording, conversation mode, text-to-speech, translation history, PWA support, and zero API cost.',
+    tech: ['Next.js 14', 'FastAPI', 'OpenAI Whisper', 'LibreTranslate', 'WebSocket', 'PostgreSQL', 'TypeScript'],
+    github: 'https://github.com/D3stroy3rX9/AI-Projects/tree/claude/ai-portfolio-projects-011CUtyujqLRprJcKWjRe7eW/audio-translator',
+    status: 'live',
+  },
+  {
     id: 'sentiment-analysis',
-    name: 'Sentiment Analysis',
-    description: 'A text sentiment analyser that evaluates the emotional tone of any input — positive, negative, or neutral. Paste any text and get an instant sentiment breakdown.',
-    tech: ['Python', 'NLP', 'Machine Learning'],
+    name: 'Sentiment Analysis Dashboard',
+    description: 'Production-grade sentiment analysis using classical ML (TF-IDF + Naive Bayes via scikit-learn). Achieves F1 >0.75 — competitive with BERT — at 10,000+ predictions/second with zero API cost. Features a real-time dashboard, explainable predictions, and custom model training.',
+    tech: ['Next.js 14', 'FastAPI', 'scikit-learn', 'PostgreSQL', 'TimescaleDB', 'Redis', 'Celery', 'TypeScript'],
+    github: 'https://github.com/D3stroy3rX9/AI-Projects/tree/claude/ai-portfolio-projects-011CUtyujqLRprJcKWjRe7eW/sentiment-analysis',
     status: 'live',
   },
   {
