@@ -157,8 +157,13 @@ function fmtDate(ts: number) {
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
-function NotesApp({ onClose }: { onClose: () => void }) {
-  const { notes, addNote, editNote, deleteNote } = useNotes();
+function NotesApp({ onClose, notes, addNote, editNote, deleteNote }: {
+  onClose: () => void;
+  notes: Note[];
+  addNote: () => string;
+  editNote: (id: string, text: string) => void;
+  deleteNote: (id: string) => void;
+}) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const textRef = useRef<HTMLTextAreaElement>(null);
   useEscapeKey(() => { if (activeId) setActiveId(null); else onClose(); });
@@ -235,7 +240,7 @@ function NotesApp({ onClose }: { onClose: () => void }) {
 }
 
 function NotesWidget() {
-  const { notes } = useNotes();
+  const { notes, addNote, editNote, deleteNote } = useNotes();
   const [open, setOpen] = useState(false);
 
   return (
@@ -243,12 +248,20 @@ function NotesWidget() {
       <div className="widget widget-notes" onClick={() => setOpen(true)} style={{ cursor: 'pointer' }}>
         <div className="notes-header">Notes</div>
         <ul className="notes-list">
-          {notes.slice(0, 5).map(n => (
+          {notes.map(n => (
             <li key={n.id} className="notes-item">{n.text.split('\n')[0] || 'New Note'}</li>
           ))}
         </ul>
       </div>
-      {open && <NotesApp onClose={() => setOpen(false)} />}
+      {open && (
+        <NotesApp
+          onClose={() => setOpen(false)}
+          notes={notes}
+          addNote={addNote}
+          editNote={editNote}
+          deleteNote={deleteNote}
+        />
+      )}
     </>
   );
 }
