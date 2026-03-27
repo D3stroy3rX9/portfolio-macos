@@ -319,6 +319,154 @@
 [data-theme="light"] .photos-dot { background: rgba(0, 0, 0, 0.3); }
 [data-theme="light"] .photos-dot.active { background: rgba(0, 0, 0, 0.75); }
 
+/* ── iOS Notes App ── */
+.ios-notes-app {
+  width: min(390px, 94vw);
+  max-height: 82vh;
+  background: #1c1c1e;
+  border-radius: 24px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+  animation: lb-img-in 0.22s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ios-notes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 10px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+.ios-notes-add {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.ios-notes-add:hover { background: rgba(255,255,255,0.1); }
+
+.ios-notes-back {
+  background: none;
+  border: none;
+  color: #ffd60a;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 2px 0;
+  font-family: inherit;
+}
+
+.ios-notes-list {
+  overflow-y: auto;
+  flex: 1;
+  scrollbar-width: none;
+}
+.ios-notes-list::-webkit-scrollbar { display: none; }
+
+.ios-notes-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.07);
+  cursor: pointer;
+  transition: background 0.12s;
+  position: relative;
+}
+.ios-notes-row:hover { background: rgba(255,255,255,0.05); }
+
+.ios-notes-row-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+.ios-notes-row-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ios-notes-row-date {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+}
+.ios-notes-row-preview {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+.ios-notes-delete {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.25);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.ios-notes-row:hover .ios-notes-delete { opacity: 1; }
+.ios-notes-delete:hover { color: #ff3b30; }
+
+.ios-notes-empty {
+  text-align: center;
+  color: rgba(255,255,255,0.35);
+  font-size: 14px;
+  padding: 40px 20px;
+}
+
+.ios-notes-editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 20px 16px;
+  overflow: hidden;
+}
+.ios-notes-editor-date {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  margin-bottom: 12px;
+}
+.ios-notes-textarea {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  resize: none;
+  line-height: 1.6;
+  min-height: 300px;
+}
+.ios-notes-textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+.ios-notes-footer {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  padding: 10px;
+  border-top: 0.5px solid rgba(255,255,255,0.07);
+  flex-shrink: 0;
+}
+
 /* ── iOS App Overlay (shared) ── */
 .ios-app-overlay {
   position: fixed;

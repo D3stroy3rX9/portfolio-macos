@@ -109,24 +109,147 @@ function CalendarWidget() {
 }
 
 // ── Notes ─────────────────────────────────────────────────
-const NOTES = [
-  'Ship the portfolio 🚀',
-  'Review PRs',
-  'Coffee ☕',
-  'DSA practice',
-  'Read: Clean Code',
+interface Note { id: string; text: string; updatedAt: number; }
+
+const NOTES_KEY = 'portfolio_notes';
+
+const DEFAULT_NOTES: Note[] = [
+  { id: '1', text: 'Ship the portfolio 🚀', updatedAt: Date.now() },
+  { id: '2', text: 'Review PRs',            updatedAt: Date.now() },
+  { id: '3', text: 'Coffee ☕',              updatedAt: Date.now() },
+  { id: '4', text: 'DSA practice',          updatedAt: Date.now() },
+  { id: '5', text: 'Read: Clean Code',      updatedAt: Date.now() },
 ];
 
+function loadNotes(): Note[] {
+  try {
+    const raw = localStorage.getItem(NOTES_KEY);
+    if (raw) return JSON.parse(raw) as Note[];
+  } catch {}
+  return DEFAULT_NOTES;
+}
+
+function saveNotes(notes: Note[]) {
+  localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+}
+
+function useNotes() {
+  const [notes, setNotes] = useState<Note[]>(loadNotes);
+
+  const update = (next: Note[]) => { setNotes(next); saveNotes(next); };
+
+  const addNote = () => {
+    const n: Note = { id: Date.now().toString(), text: '', updatedAt: Date.now() };
+    update([n, ...notes]);
+    return n.id;
+  };
+
+  const editNote = (id: string, text: string) =>
+    update(notes.map(n => n.id === id ? { ...n, text, updatedAt: Date.now() } : n));
+
+  const deleteNote = (id: string) => update(notes.filter(n => n.id !== id));
+
+  return { notes, addNote, editNote, deleteNote };
+}
+
+function fmtDate(ts: number) {
+  const d = new Date(ts);
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function NotesApp({ onClose }: { onClose: () => void }) {
+  const { notes, addNote, editNote, deleteNote } = useNotes();
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const textRef = useRef<HTMLTextAreaElement>(null);
+  useEscapeKey(() => { if (activeId) setActiveId(null); else onClose(); });
+
+  const handleNew = () => {
+    const id = addNote();
+    setActiveId(id);
+    setTimeout(() => textRef.current?.focus(), 50);
+  };
+
+  const activeNote = notes.find(n => n.id === activeId);
+
+  return createPortal(
+    <div className="ios-app-overlay" onClick={() => activeId ? setActiveId(null) : onClose()}>
+      <div className="ios-notes-app" onClick={e => e.stopPropagation()}>
+        {/* Header */}
+        <div className="ios-notes-header">
+          {activeId ? (
+            <>
+              <button className="ios-notes-back" onClick={() => setActiveId(null)}>‹ Notes</button>
+              <button className="ios-app-close" onClick={() => { deleteNote(activeId); setActiveId(null); }}>🗑️</button>
+            </>
+          ) : (
+            <>
+              <button className="ios-app-close" onClick={onClose}>✕</button>
+              <span className="ios-app-title">Notes</span>
+              <button className="ios-notes-add" onClick={handleNew}>✏️</button>
+            </>
+          )}
+        </div>
+
+        {activeNote ? (
+          /* Editor */
+          <div className="ios-notes-editor">
+            <div className="ios-notes-editor-date">{fmtDate(activeNote.updatedAt)}</div>
+            <textarea
+              ref={textRef}
+              className="ios-notes-textarea"
+              value={activeNote.text}
+              onChange={e => editNote(activeNote.id, e.target.value)}
+              placeholder="Start typing…"
+              autoFocus
+            />
+          </div>
+        ) : (
+          /* List */
+          <div className="ios-notes-list">
+            {notes.length === 0 && (
+              <div className="ios-notes-empty">No notes yet. Tap ✏️ to add one.</div>
+            )}
+            {notes.map(n => (
+              <div key={n.id} className="ios-notes-row" onClick={() => setActiveId(n.id)}>
+                <div className="ios-notes-row-main">
+                  <span className="ios-notes-row-title">{n.text.split('\n')[0] || 'New Note'}</span>
+                  <span className="ios-notes-row-date">{fmtDate(n.updatedAt)}</span>
+                </div>
+                <span className="ios-notes-row-preview">
+                  {n.text.split('\n').slice(1).join(' ').slice(0, 40) || 'No additional text'}
+                </span>
+                <button className="ios-notes-delete" onClick={e => { e.stopPropagation(); deleteNote(n.id); }}>✕</button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Footer count */}
+        {!activeId && (
+          <div className="ios-notes-footer">{notes.length} note{notes.length !== 1 ? 's' : ''}</div>
+        )}
+      </div>
+    </div>,
+    document.body
+  );
+}
+
 function NotesWidget() {
+  const { notes } = useNotes();
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="widget widget-notes">
-      <div className="notes-header">Notes</div>
-      <ul className="notes-list">
-        {NOTES.map((note, i) => (
-          <li key={i} className="notes-item">{note}</li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="widget widget-notes" onClick={() => setOpen(true)} style={{ cursor: 'pointer' }}>
+        <div className="notes-header">Notes</div>
+        <ul className="notes-list">
+          {notes.slice(0, 5).map(n => (
+            <li key={n.id} className="notes-item">{n.text.split('\n')[0] || 'New Note'}</li>
+          ))}
+        </ul>
+      </div>
+      {open && <NotesApp onClose={() => setOpen(false)} />}
+    </>
   );
 }
 
