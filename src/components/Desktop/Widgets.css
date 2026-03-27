@@ -319,6 +319,275 @@
 [data-theme="light"] .photos-dot { background: rgba(0, 0, 0, 0.3); }
 [data-theme="light"] .photos-dot.active { background: rgba(0, 0, 0, 0.75); }
 
+/* ── iOS App Overlay (shared) ── */
+.ios-app-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lb-in 0.2s ease;
+}
+
+.ios-app-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.ios-app-close:hover { background: rgba(255,255,255,0.25); }
+
+.ios-app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 8px;
+}
+
+.ios-app-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+/* ── iOS Calendar App ── */
+.ios-calendar-app {
+  width: min(420px, 92vw);
+  background: #1c1c1e;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+  animation: lb-img-in 0.22s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+}
+
+.ios-cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 20px 16px;
+}
+
+.ios-cal-month-label {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ios-cal-arrow {
+  background: none;
+  border: none;
+  color: #0a84ff;
+  font-size: 26px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.ios-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  padding: 0 12px;
+}
+
+.ios-cal-day-hdr {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  padding: 6px 0;
+}
+
+.ios-cal-day {
+  text-align: center;
+  font-size: 17px;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.12s;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px auto;
+  width: 36px;
+  height: 36px;
+}
+.ios-cal-day:hover:not(.ios-empty) { background: rgba(255,255,255,0.1); }
+.ios-today {
+  background: #ff3b30 !important;
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 50%;
+}
+.ios-empty { color: transparent; pointer-events: none; }
+
+.ios-cal-today-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px 20px;
+  border-top: 0.5px solid rgba(255,255,255,0.1);
+  margin-top: 8px;
+}
+.ios-cal-today-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ff3b30;
+  flex-shrink: 0;
+}
+.ios-cal-today-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ── iOS Weather App ── */
+.ios-weather-app {
+  width: min(390px, 94vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #1a3a5c 0%, #0d2137 40%, #0a1628 100%);
+  border-radius: 24px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+  animation: lb-img-in 0.22s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  position: relative;
+  scrollbar-width: none;
+}
+.ios-weather-app::-webkit-scrollbar { display: none; }
+
+.ios-weather-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+}
+
+.ios-weather-hero {
+  text-align: center;
+  padding: 48px 24px 28px;
+  color: #fff;
+}
+.ios-weather-city {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+.ios-weather-temp-big {
+  font-size: 96px;
+  font-weight: 100;
+  line-height: 1;
+  letter-spacing: -4px;
+  margin: 4px 0;
+}
+.ios-weather-desc {
+  font-size: 20px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 4px;
+}
+.ios-weather-hl {
+  font-size: 18px;
+  color: rgba(255,255,255,0.65);
+}
+
+.ios-weather-card {
+  margin: 0 16px 12px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 14px 16px;
+  border: 0.5px solid rgba(255,255,255,0.1);
+}
+
+.ios-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+
+.ios-hourly-scroll {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.ios-hourly-scroll::-webkit-scrollbar { display: none; }
+
+.ios-hour-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 48px;
+  flex-shrink: 0;
+}
+.ios-hour-time { font-size: 12px; color: rgba(255,255,255,0.55); }
+.ios-hour-emoji { font-size: 22px; }
+.ios-hour-temp { font-size: 15px; color: #fff; font-weight: 500; }
+
+.ios-daily-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.06);
+  color: #fff;
+}
+.ios-daily-row:last-child { border-bottom: none; }
+.ios-daily-day   { font-size: 15px; font-weight: 500; width: 48px; flex-shrink: 0; }
+.ios-daily-emoji { font-size: 20px; flex-shrink: 0; }
+.ios-daily-rain  { font-size: 11px; color: #5ac8fa; width: 36px; text-align: center; flex-shrink: 0; }
+.ios-daily-bar-wrap { flex: 1; display: flex; align-items: center; gap: 6px; }
+.ios-daily-min, .ios-daily-max { font-size: 14px; color: rgba(255,255,255,0.55); width: 28px; flex-shrink: 0; }
+.ios-daily-max { color: #fff; text-align: right; }
+.ios-daily-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+  position: relative;
+}
+.ios-daily-bar-fill {
+  position: absolute;
+  top: 0; bottom: 0;
+  background: linear-gradient(90deg, #ffd60a, #ff9f0a);
+  border-radius: 2px;
+}
+
+.ios-weather-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 16px 20px;
+}
+.ios-detail-card {
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 14px;
+  border: 0.5px solid rgba(255,255,255,0.1);
+}
+.ios-detail-label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.45); letter-spacing: 0.6px; margin-bottom: 8px; }
+.ios-detail-value { font-size: 32px; font-weight: 300; color: #fff; line-height: 1; }
+.ios-detail-unit  { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
 /* ── Lightbox ── */
 .lightbox-overlay {
   position: fixed;
