@@ -212,15 +212,30 @@ function Lightbox({ idx, onClose, onPrev, onNext }: { idx: number; onClose: () =
 }
 
 function PhotoCarousel() {
-  const [idx, setIdx]       = useState(0);
-  const [open, setOpen]     = useState(false);
+  const [idx, setIdx]   = useState(0);
+  const [open, setOpen] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  useEffect(() => {
+  const startTimer = () => {
     if (PHOTOS.length <= 1) return;
+    if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => setIdx(i => (i + 1) % PHOTOS.length), 4000);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  };
+
+  const stopTimer = () => {
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+  };
+
+  useEffect(() => {
+    startTimer();
+    return stopTimer;
   }, []);
+
+  // Pause auto-advance while lightbox is open
+  useEffect(() => {
+    if (open) stopTimer();
+    else startTimer();
+  }, [open]);
 
   const prev = () => setIdx(i => (i - 1 + PHOTOS.length) % PHOTOS.length);
   const next = () => setIdx(i => (i + 1) % PHOTOS.length);
