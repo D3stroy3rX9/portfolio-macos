@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import './Widgets.css';
 
 // ── Calendar ──────────────────────────────────────────────
@@ -175,8 +176,44 @@ const photoModules = import.meta.glob(
 
 const PHOTOS = Object.values(photoModules).map(m => m.default);
 
+function Lightbox({ idx, onClose, onPrev, onNext }: { idx: number; onClose: () => void; onPrev: () => void; onNext: () => void }) {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') onPrev();
+      if (e.key === 'ArrowRight') onNext();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [onClose, onPrev, onNext]);
+
+  return createPortal(
+    <div className="lightbox-overlay" onClick={onClose}>
+      <button className="lightbox-close" onClick={onClose}>✕</button>
+      {PHOTOS.length > 1 && (
+        <>
+          <button className="lightbox-nav prev" onClick={e => { e.stopPropagation(); onPrev(); }}>‹</button>
+          <button className="lightbox-nav next" onClick={e => { e.stopPropagation(); onNext(); }}>›</button>
+        </>
+      )}
+      <img
+        key={idx}
+        src={PHOTOS[idx]}
+        className="lightbox-img"
+        alt="photo"
+        onClick={e => e.stopPropagation()}
+      />
+      {PHOTOS.length > 1 && (
+        <div className="lightbox-counter">{idx + 1} / {PHOTOS.length}</div>
+      )}
+    </div>,
+    document.body
+  );
+}
+
 function PhotoCarousel() {
-  const [idx, setIdx] = useState(0);
+  const [idx, setIdx]       = useState(0);
+  const [open, setOpen]     = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
@@ -184,6 +221,9 @@ function PhotoCarousel() {
     timerRef.current = setInterval(() => setIdx(i => (i + 1) % PHOTOS.length), 4000);
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, []);
+
+  const prev = () => setIdx(i => (i - 1 + PHOTOS.length) % PHOTOS.length);
+  const next = () => setIdx(i => (i + 1) % PHOTOS.length);
 
   if (PHOTOS.length === 0) {
     return (
@@ -195,25 +235,29 @@ function PhotoCarousel() {
   }
 
   return (
-    <div className="widget widget-photos">
-      <img
-        key={idx}
-        src={PHOTOS[idx]}
-        className="photos-img"
-        alt="photo"
-      />
-      {PHOTOS.length > 1 && (
-        <div className="photos-dots">
-          {PHOTOS.map((_, i) => (
-            <button
-              key={i}
-              className={`photos-dot ${i === idx ? 'active' : ''}`}
-              onClick={() => setIdx(i)}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    <>
+      <div className="widget widget-photos">
+        <img
+          key={idx}
+          src={PHOTOS[idx]}
+          className="photos-img"
+          alt="photo"
+          onClick={() => setOpen(true)}
+        />
+        {PHOTOS.length > 1 && (
+          <div className="photos-dots">
+            {PHOTOS.map((_, i) => (
+              <button
+                key={i}
+                className={`photos-dot ${i === idx ? 'active' : ''}`}
+                onClick={e => { e.stopPropagation(); setIdx(i); }}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+      {open && <Lightbox idx={idx} onClose={() => setOpen(false)} onPrev={prev} onNext={next} />}
+    </>
   );
 }
 
