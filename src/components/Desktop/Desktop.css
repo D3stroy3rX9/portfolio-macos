@@ -1,7 +1,7 @@
 /* Desktop — shader canvas handles the background */
 .desktop {
   position: fixed;
-  top: 25px;
+  top: 25px; /* matches default menubar height */
   left: 0;
   right: 0;
   bottom: 0;
@@ -254,14 +254,28 @@
 }
 
 [data-theme="light"] .desktop-greeting h1 {
-  background: linear-gradient(135deg, #4c1d95, #1d4ed8, #0891b2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #3F2DBF;
+  -webkit-text-fill-color: #3F2DBF;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
 }
 
 [data-theme="light"] .desktop-greeting p {
-  color: rgba(15, 23, 42, 0.62);
+  color: #000000;
+  -webkit-text-fill-color: #000000;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
+
+[data-theme="light"] .greeting-hint {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  opacity: 0.5;
 }
 
 /* ===== RESPONSIVE ===== */

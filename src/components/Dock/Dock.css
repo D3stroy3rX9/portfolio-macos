@@ -127,8 +127,12 @@
 
 @media (max-width: 768px) {
   .dock-wrapper {
-    bottom: max(6px, env(safe-area-inset-bottom));
-    padding: 12px 0 0;
+    /* Reset transform-based centering — causes iOS horizontal overflow */
+    left: 0;
+    right: 0;
+    transform: none;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    padding: 10px 0 0;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -140,7 +144,6 @@
     max-width: calc(100vw - 24px);
     overflow-x: auto;
     scrollbar-width: none;
-    /* No hover expand on mobile */
     transition: none;
   }
   .dock::-webkit-scrollbar { display: none; }

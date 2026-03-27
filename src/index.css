@@ -36,11 +36,20 @@ html, body, #root {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  /* Prevent ANY horizontal scroll leak on mobile */
+  max-width: 100vw;
   font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--bg-deep);
   color: var(--text-primary);
+}
+
+/* iOS Safari: position:fixed only works reliably when the scroll
+   container is the root. Use a fixed full-screen root element. */
+#root {
+  position: fixed;
+  inset: 0;
 }
 
 ::-webkit-scrollbar {
