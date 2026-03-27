@@ -93,8 +93,8 @@ export default function Terminal() {
         addLines([
           { type: 'success', content: '\n── Backend ──────────────────────' },
           { type: 'output', content: '  ' + skills.backend.join(' · ') },
-          { type: 'success', content: '\n── Frontend ─────────────────────' },
-          { type: 'output', content: '  ' + skills.frontend.join(' · ') },
+          { type: 'success', content: '\n── E-Commerce ───────────────────' },
+          { type: 'output', content: '  ' + skills.ecommerce.join(' · ') },
           { type: 'success', content: '\n── DevOps ───────────────────────' },
           { type: 'output', content: '  ' + skills.devops.join(' · ') },
           { type: 'success', content: '\n── Data ─────────────────────────' },

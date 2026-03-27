@@ -13,8 +13,12 @@ export default function AboutMe() {
             <span className="badge">Java</span>
             <span className="badge">Spring Boot</span>
             <span className="badge">SAP Commerce</span>
+            <span className="badge">REST APIs</span>
+            <span className="badge">gRPC</span>
+            <span className="badge">FastAPI</span>
             <span className="badge">Microservices</span>
-            <span className="badge">MCP Protocol</span>
+            <span className="badge">CCv2</span>
+            <span className="badge">Docker</span>
           </div>
         </div>
       </div>
@@ -22,13 +26,14 @@ export default function AboutMe() {
       <div className="about-section">
         <h2>~/about</h2>
         <p>
-          Backend developer with deep expertise in SAP Hybris/Commerce Cloud and enterprise Java ecosystems.
-          I build scalable microservices, design CI/CD pipelines, and lately — I've been exploring how the
-          Model Context Protocol (MCP) can bridge AI tools with developer workflows.
+          Backend Engineer with 4 years in SAP Commerce Cloud, delivering scalable B2B/B2C solutions.
+          Expert in CCv2 migrations, Spartacus storefronts, and Java/Spring microservices — with proven
+          success in feature development, technical design, and defect triage.
         </p>
         <p>
-          This portfolio itself is a testament to that: a macOS desktop simulator with a built-in terminal
-          that connects to a real MCP CI/CD server. Feel free to explore, open windows, and try the terminal.
+          Award-winning developer combining deep commerce platform expertise with AI-assisted development.
+          Currently driving project-wide AI adoption at Deloitte — building guardrails and rulesets for
+          LLM models to standardise code generation and issue resolution.
         </p>
       </div>
 
@@ -51,22 +56,33 @@ export default function AboutMe() {
       </div>
 
       <div className="about-section">
-        <h2>~/what-im-building</h2>
+        <h2>~/certifications &amp; awards</h2>
         <div className="building-grid">
           <div className="building-card">
-            <span className="building-icon">🔧</span>
+            <span className="building-icon">🏆</span>
             <div>
-              <strong>MCP CI/CD Server</strong>
-              <p>AI-callable tools for GitHub Actions &amp; Jenkins pipelines</p>
+              <strong>SAP Certified Developer</strong>
+              <p>SAP Commerce Cloud — C4H34-2411 &amp; Google AI Prompting Essentials</p>
             </div>
           </div>
           <div className="building-card">
-            <span className="building-icon">🖥️</span>
+            <span className="building-icon">⭐</span>
             <div>
-              <strong>This Portfolio</strong>
-              <p>macOS desktop simulator with live CI/CD integration</p>
+              <strong>Deloitte Awards</strong>
+              <p>Debutant Rockstar (2023) · 2× Applause · 3× Spot · Commerce Day Booth Winner (2024)</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="about-section">
+        <h2>~/education</h2>
+        <div className="experience-card">
+          <div className="exp-header">
+            <span className="exp-role">B.E. Mechanical Engineering</span>
+            <span className="exp-period">2017 — 2021</span>
+          </div>
+          <span className="exp-company">Birla Institute of Technology, Mesra — GPA: 8.91 / 10</span>
         </div>
       </div>
     </div>
