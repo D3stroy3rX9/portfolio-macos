@@ -21,7 +21,7 @@ export const projects: Project[] = [
     id: 'shane-co',
     name: 'Shane Co. – B2C Commerce Platform',
     description: 'Developed PLP Pagination, Solr Customization, and Third-Party vendor integrations for a large-scale B2C jewellery e-commerce platform supporting 500K+ monthly active users.',
-    tech: ['SAP Commerce Cloud', 'Spartacus', 'Solr', 'Spring Boot', 'REST APIs'],
+    tech: ['SAP Commerce Cloud', 'Java', 'Spartacus', 'Solr', 'Spring Boot', 'REST APIs'],
     status: 'archived',
   },
   {
