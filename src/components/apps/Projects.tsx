@@ -2,15 +2,36 @@ import { useState } from 'react';
 import { projects, type Project } from '../../data/projects';
 import './Apps.css';
 
+type FilterType = 'all' | 'live' | 'in-progress' | 'archived' | string;
+
+const TAGS = ['Java', 'SAP Commerce', 'Python', 'React', 'Next.js', 'FastAPI'];
+
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [view, setView] = useState<'grid' | 'list'>('grid');
+  const [view, setView]     = useState<'grid' | 'list'>('grid');
+  const [filter, setFilter] = useState<FilterType>('all');
 
   const statusColors: Record<string, string> = {
-    'live': '#28c840',
+    'live':        '#28c840',
     'in-progress': '#febc2e',
-    'archived': '#8e8e93',
+    'archived':    '#8e8e93',
   };
+
+  const filtered = projects.filter(p => {
+    if (filter === 'all')         return true;
+    if (filter === 'live')        return p.status === 'live';
+    if (filter === 'in-progress') return p.status === 'in-progress';
+    if (filter === 'archived')    return p.status === 'archived';
+    // tag filter
+    return p.tech.some(t => t.toLowerCase().includes(filter.toLowerCase()));
+  });
+
+  const handleFilter = (f: FilterType) => {
+    setFilter(f);
+    setSelectedProject(null);
+  };
+
+  const isActive = (f: FilterType) => filter === f;
 
   return (
     <div className="app-projects">
@@ -23,7 +44,7 @@ export default function Projects() {
           <button className="toolbar-btn" disabled>
             <svg width="8" height="12" viewBox="0 0 8 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M1.5 1L6.5 6L1.5 11"/></svg>
           </button>
-          <span className="toolbar-path">~/projects</span>
+          <span className="toolbar-path">~/projects / {filter === 'all' ? 'all' : filter}</span>
         </div>
         <div className="toolbar-actions">
           <button className={`toolbar-btn ${view === 'grid' ? 'active' : ''}`} onClick={() => setView('grid')}>
@@ -40,24 +61,32 @@ export default function Projects() {
         <div className="projects-sidebar">
           <div className="sidebar-section">
             <span className="sidebar-label">Favorites</span>
-            <div className="sidebar-item active">📁 All Projects</div>
-            <div className="sidebar-item">🟢 Live</div>
-            <div className="sidebar-item">🟡 In Progress</div>
-            <div className="sidebar-item">⚫ Archived</div>
+            <div className={`sidebar-item ${isActive('all') ? 'active' : ''}`} onClick={() => handleFilter('all')}>📁 All Projects</div>
+            <div className={`sidebar-item ${isActive('live') ? 'active' : ''}`} onClick={() => handleFilter('live')}>🟢 Live</div>
+            <div className={`sidebar-item ${isActive('in-progress') ? 'active' : ''}`} onClick={() => handleFilter('in-progress')}>🟡 In Progress</div>
+            <div className={`sidebar-item ${isActive('archived') ? 'active' : ''}`} onClick={() => handleFilter('archived')}>⚫ Archived</div>
           </div>
           <div className="sidebar-section">
             <span className="sidebar-label">Tags</span>
-            <div className="sidebar-item">🏷️ Java</div>
-            <div className="sidebar-item">🏷️ SAP Commerce</div>
-            <div className="sidebar-item">🏷️ Python</div>
+            {TAGS.map(tag => (
+              <div
+                key={tag}
+                className={`sidebar-item ${isActive(tag) ? 'active' : ''}`}
+                onClick={() => handleFilter(tag)}
+              >
+                🏷️ {tag}
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Main content */}
         <div className="projects-main">
-          {view === 'grid' ? (
+          {filtered.length === 0 ? (
+            <div className="projects-empty">No projects match this filter.</div>
+          ) : view === 'grid' ? (
             <div className="projects-grid">
-              {projects.map(p => (
+              {filtered.map(p => (
                 <div
                   key={p.id}
                   className={`project-card ${selectedProject?.id === p.id ? 'selected' : ''}`}
@@ -80,7 +109,7 @@ export default function Projects() {
                 <span className="list-col status">Status</span>
                 <span className="list-col tech">Stack</span>
               </div>
-              {projects.map(p => (
+              {filtered.map(p => (
                 <div
                   key={p.id}
                   className={`list-row ${selectedProject?.id === p.id ? 'selected' : ''}`}
