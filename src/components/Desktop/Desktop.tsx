@@ -191,7 +191,7 @@ export default function Desktop() {
       {/* Name card — bottom-right corner */}
       {!hasOpenWindows && (
         <div className="desktop-greeting">
-          <h1>Amrit</h1>
+          <h1>Welcome to Amrit's Portfolio!</h1>
           <p>SAP Hybris Backend Dev &middot; AI Tools Enthusiast</p>
           <p className="greeting-hint">Click an icon or use the dock below</p>
         </div>
