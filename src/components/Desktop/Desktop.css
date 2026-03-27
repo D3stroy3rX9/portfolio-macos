@@ -164,7 +164,7 @@
   position: absolute;
   bottom: 80px;   /* above the dock */
   right: 96px;    /* left of the icon column */
-  text-align: right;
+  text-align: center;
   z-index: 2;
   pointer-events: none;
   padding: 22px 28px;
@@ -179,7 +179,7 @@
 }
 
 .desktop-greeting h1 {
-  font-size: 22px;
+  font-size: 32px;
   font-weight: 700;
   font-family: 'Archivo', sans-serif;
   margin: 0 0 4px;
