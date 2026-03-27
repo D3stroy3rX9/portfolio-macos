@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { projects, skills } from '../../data/projects';
+import { projects, skills, experience } from '../../data/projects';
 import './Apps.css';
 
 interface TerminalLine {
@@ -137,20 +137,21 @@ export default function Terminal() {
       case 'experience':
         addLines([
           { type: 'output', content: '' },
-          { type: 'success', content: '  SAP Hybris Developer @ Your Company' },
-          { type: 'output', content: '  2022 — Present\n' },
-          { type: 'output', content: '  • Built SAP Commerce Cloud storefronts (1M+ users)' },
-          { type: 'output', content: '  • Designed microservices for order management' },
-          { type: 'output', content: '  • Implemented CI/CD pipelines (-60% deploy time)\n' },
+          ...experience.flatMap(exp => [
+            { type: 'success' as const, content: `  ${exp.role} @ ${exp.company}` },
+            { type: 'output' as const, content: `  ${exp.period}\n` },
+            ...exp.highlights.map(h => ({ type: 'output' as const, content: `  • ${h}` })),
+            { type: 'output' as const, content: '' },
+          ]),
         ]);
         break;
 
       case 'contact':
         addLines([
           { type: 'output', content: '\n  📧 Email:    amrit.01sinha@gmail.com' },
-          { type: 'output', content: '  💼 LinkedIn: linkedin.com/in/yourprofile' },
-          { type: 'output', content: '  🐙 GitHub:   github.com/yourusername' },
-          { type: 'output', content: '  🌐 Website:  amrit.dev\n' },
+          { type: 'output', content: '  💼 LinkedIn: linkedin.com/in/amrit001' },
+          { type: 'output', content: '  🐙 GitHub:   github.com/D3stroy3rX9' },
+          { type: 'output', content: '  📍 Location: Bengaluru, India\n' },
         ]);
         break;
 
