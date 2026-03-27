@@ -614,10 +614,18 @@
   box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
 }
 
-.send-btn:disabled {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+.send-btn:disabled { opacity: 0.75; cursor: not-allowed; }
+.send-btn.sent    { background: linear-gradient(135deg, #22c55e, #16a34a); box-shadow: 0 4px 14px rgba(34,197,94,0.35); }
+.send-btn.error   { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 14px rgba(239,68,68,0.35); }
+
+.send-error {
+  font-size: 12px;
+  color: #f87171;
+  align-self: center;
+  margin-left: 10px;
 }
+
+.mail-form { display: flex; flex-direction: column; flex: 1; }
 
 .contact-links {
   padding: 14px 16px;
