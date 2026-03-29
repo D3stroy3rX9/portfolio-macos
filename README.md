@@ -13,7 +13,7 @@
 
 ---
 
-![Portfolio Preview](docs/preview.png)
+![Portfolio Preview](docs/Portfolio_MacOs_Preview.png)
 
 ---
 
