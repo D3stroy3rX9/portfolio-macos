@@ -97,9 +97,9 @@ Specialising in SAP Commerce Cloud (Hybris), Java Spring Boot microservices, and
 | Project | Description | Stack | Status |
 |---|---|---|---|
 | **Caterpillar ONE** | Global B2B e-commerce platform | SAP Commerce, Java, CCv2 | 🟡 In Progress |
-| **Audio Auto-Translator** | Real-time voice translation, 100+ languages | Next.js, FastAPI, Whisper, WebSocket | 🟢 Live |
+| **[LinguaAI](https://amrit-lingua-ai.vercel.app)** | Real-time voice & text translation, 100+ languages | Next.js, FastAPI, Whisper, WebSocket | 🟢 Live |
 | **Sentiment Analysis Dashboard** | Production ML dashboard, F1 >0.75, 10K+ preds/sec | Next.js, FastAPI, scikit-learn, Redis | 🟢 Live |
-| **Stoic Penguin Path Tracker** | Interactive visual metaphor for stoic independence | Python, Visualisation | 🟢 Live |
+| **[World Cup 2026 Predictor](https://amrit-wc26predictor.vercel.app)** | ML bracket predictor using ELO ratings & team form | Python, scikit-learn, Pandas | 🟢 Live |
 | **Shane Co.** | B2C jewellery platform, 500K+ MAU | SAP Commerce, Java, Spartacus, Solr | ⚫ Archived |
 | **EoMM CCv2 Migration** | On-prem → CCv2 migration, 40% perf gain | SAP Commerce, HANA DB, Jenkins | ⚫ Archived |
 
